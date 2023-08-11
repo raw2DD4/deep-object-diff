@@ -5,8 +5,8 @@ const diff = (lhs, rhs) => {
 
   if (!isObject(lhs) || !isObject(rhs)) return rhs; // return updated rhs
 
-  const l = lhs;
-  const r = rhs;
+  let l = lhs;
+  let r = rhs;
 
   const deletedValues = Object.keys(l).reduce((acc, key) => {
     return hasOwnProperty(r, key) ? acc : { ...acc, [key]: undefined };
@@ -18,6 +18,8 @@ const diff = (lhs, rhs) => {
   }
 
   if (Array.isArray(r) && Array.isArray(l)) {
+    l = l.sort();
+    r = r.sort();
     const deletedValues = l.reduce((acc, item, index) => {
       return hasOwnProperty(r, index) ? acc.concat(item) : acc.concat(undefined);
     }, []);
