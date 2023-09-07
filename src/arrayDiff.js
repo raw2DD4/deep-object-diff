@@ -18,8 +18,8 @@ const diff = (lhs, rhs) => {
   }
 
   if (Array.isArray(r) && Array.isArray(l)) {
-    l = l.sort();
-    r = r.sort();
+    l = [...l].sort();
+    r = [...r].sort();
     const deletedValues = l.reduce((acc, item, index) => {
       return hasOwnProperty(r, index) ? acc.concat(item) : acc.concat(undefined);
     }, []);
